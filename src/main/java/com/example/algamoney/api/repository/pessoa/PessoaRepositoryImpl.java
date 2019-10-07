@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
+import com.example.algamoney.api.model.Endereco_;
 import com.example.algamoney.api.model.Pessoa;
 import com.example.algamoney.api.model.Pessoa_;
 import com.example.algamoney.api.repository.filter.PessoaFilter;
@@ -46,6 +47,22 @@ public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
 		
 		if(!StringUtils.isEmpty(pessoaFilter.getNome())){
 			predicates.add(builder.like(builder.lower(root.get(Pessoa_.nome)), "%" + pessoaFilter.getNome().toLowerCase() + "%"));
+		}
+		
+		if(!StringUtils.isEmpty(pessoaFilter.getCidade())){
+			predicates.add(builder.like(builder.lower(root.get(Pessoa_.endereco).get(Endereco_.cidade)), "%" + pessoaFilter.getCidade().toLowerCase() + "%"));
+		}
+		
+		if(!StringUtils.isEmpty(pessoaFilter.getEstado())){
+			predicates.add(builder.like(builder.lower(root.get(Pessoa_.endereco).get(Endereco_.estado)), "%" + pessoaFilter.getEstado().toLowerCase() + "%"));
+		}
+		
+		if(pessoaFilter.getAtivo()){
+			predicates.add(builder.equal(root.get(Pessoa_.ativo), true));
+		}
+		
+		if(!pessoaFilter.getAtivo() ){
+			predicates.add(builder.equal(root.get(Pessoa_.ativo), false));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

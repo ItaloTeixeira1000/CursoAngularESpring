@@ -92,12 +92,12 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		
 		if (!StringUtils.isEmpty(lancamentoFilter.getDataPagamento())) {
 			predicates.add(
-					builder.greaterThanOrEqualTo(root.get(Lancamento_.dataPagamento), lancamentoFilter.getDataPagamento()));
+					builder.equal(root.get(Lancamento_.dataPagamento), lancamentoFilter.getDataPagamento()));
 		}
 		
 		if (!StringUtils.isEmpty(lancamentoFilter.getValor())) {
 			predicates.add(
-					builder.greaterThanOrEqualTo(root.get(Lancamento_.valor), lancamentoFilter.getValor()));
+					builder.equal(root.get(Lancamento_.valor), lancamentoFilter.getValor()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

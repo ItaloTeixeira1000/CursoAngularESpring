@@ -26,6 +26,25 @@ import com.example.algamoney.api.model.Pessoa;
 import com.example.algamoney.api.repository.PessoaRepository;
 import com.example.algamoney.api.repository.filter.PessoaFilter;
 import com.example.algamoney.api.service.PessoaService;
+import com.example.algamoney.api.service.UserService;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 @RestController
 @RequestMapping("/pessoas")
@@ -39,6 +58,9 @@ public class PessoaResource {
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
+	
+	 @Autowired
+	 private UserService userService;
 
 	@PostMapping
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PESSOA') and #oauth2.hasScope('write')")
@@ -47,6 +69,18 @@ public class PessoaResource {
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getCodigo()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
 	}
+	
+	@PostMapping("/export")
+	public void export(ModelAndView model, HttpServletResponse response) throws IOException, JRException, SQLException {
+		  JasperPrint jasperPrint = null;
+
+		  response.setContentType("application/x-download");
+		  response.setHeader("Content-Disposition", String.format("attachment; filename=\"users.pdf\""));
+
+		  OutputStream out = response.getOutputStream();
+		  jasperPrint = userService.exportPdfFile();
+		  JasperExportManager.exportReportToPdfStream(jasperPrint, out);
+		 }
 
 	@GetMapping("/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")

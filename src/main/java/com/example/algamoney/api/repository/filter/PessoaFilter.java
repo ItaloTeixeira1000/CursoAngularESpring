@@ -8,7 +8,7 @@ public class PessoaFilter {
 	
 	private String estado;
 	
-	private boolean ativo;
+	private String ativo;
 	
 	
 
@@ -28,11 +28,11 @@ public class PessoaFilter {
 		this.estado = estado;
 	}
 
-	public boolean getAtivo() {
+	public String getAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(boolean ativo) {
+	public void setAtivo(String ativo) {
 		this.ativo = ativo;
 	}
 

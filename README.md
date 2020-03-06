@@ -1,5 +1,9 @@
 # Algamoney API
 
+
+   API para controle de despesas e receitas de uma determinada organização de pequeno e médio porte
+
+
 ![LOGIN](src/main/java/com/example/algamoney/api/algamoney-images/login.png)
 
 ![LOGINERRO](src/main/java/com/example/algamoney/api/algamoney-images/erroLogin.png)
@@ -22,5 +26,13 @@
 
 ![pesquisaDeMaria](src/main/java/com/example/algamoney/api/algamoney-images/mariaPesquisa.png)
 
+![Pessoas](src/main/java/com/example/algamoney/api/algamoney-images/pessoas.png)
 
-API para controle de despesas e receitas de uma determinada organização de pequeno e médio porte
+![cadastrarPessoa](src/main/java/com/example/algamoney/api/algamoney-images/cadastrarPessoa.png)
+
+![edicaoPessoa](src/main/java/com/example/algamoney/api/algamoney-images/edicaoPessoa.png)
+
+![excluirPessoas](src/main/java/com/example/algamoney/api/algamoney-images/excluirPessoas.png)
+
+![FiltrarPessoa](src/main/java/com/example/algamoney/api/algamoney-images/filtrarPessoas.png)
+
